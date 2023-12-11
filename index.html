@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>JavaScript ChatGPT Clone</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <section class="SideBar">
@@ -13,30 +14,23 @@
         </div>
     </section>
     
-    <section class="chat-container">
+    <section class="Main">
+
+        <p id="output"></p>
         <div class="chat-header">
             <h2>Chat-GPT Clone</h2>
         </div>
-        <div class="chat-messages"></div>
-        <div class="chat-input-container">
-            <input type="text" class="chat-input" placeholder="Type your message...">
-            <button class="chat-send">Send</button>
-        </div>
-    </section>
-    <section class="main">
-        
-        <p id="output"></p>
-        <div class="bottom-section">
-            <div class="input-container" placeholder="Type your message...">
-                <input/>
-                <div id="submit"></div>
+        <div class="bottom-section"></div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Type your message...">
+                <button class="chat-send">Send</button>
             </div>
-        </div>
         <p class="info">Powered by OpenAI. Free Research preview.
             Our goal is to make AI systems more natural and safe to interact with.
             Your feedback will help us improve.
         </p>
     </section>
+
     <script src="index.js"></script>
 </body>
 </html>
