@@ -1,8 +1,8 @@
-const API_KEY = "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";
-const chatSendButton = document.querySelector(".chat-send-button");
+const API_KEY = "";
+const chatSendButton = document.querySelector(".chat-send");
 const chatInput = document.querySelector(".chat-input");
 const chatContainer = document.querySelector(".chat-container");
-const outPutElement = document.querySelector(".output");
+const output = document.querySelector(".output");
 const BASE_URL = "https://api.openai.com/v1/chat/completions";
 
 async function generateResponse(message) {
@@ -17,15 +17,25 @@ async function generateResponse(message) {
             messages: [{ role: "user", content: message }],
         }),
     });
+
+    if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+
     const data = await response.json();
+
+    if (!data.choices || data.choices.length === 0) {
+        throw new Error("Error: No response choices found.");
+    }
+
     return data.choices[0].message.content;
 }
+
 
 chatSendButton.addEventListener("click", async () => {
     const message = chatInput.value;
     chatInput.value = "";
     const response = await generateResponse(message);
-    outPutElement.innerHTML = response;
+    output.innerHTML = response;
     chatContainer.scrollTop = chatContainer.scrollHeight;
 })
-
