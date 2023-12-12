@@ -18,11 +18,11 @@ h1 {
     font-weight: 600;
     padding: 200px 0 0 0;
 }
- 
+
 .SideBar {
+    background-color: #202123;
     width: 244px;
     height: 100vh;
-    background-color: #202123;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -67,6 +67,16 @@ input:focus {
     outline: none;
 }
 
+#submit {
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+
 .chat-header {
     color: white;
     width: 100%;
@@ -76,31 +86,29 @@ input:focus {
     padding: 10px 0;
 }
 
-.chat-input-container {
+.input-container {
     position: relative;
     width: 100%;
     max-width: 650px;
 }
 
-.chat-input-container #submit {
+.input-container #submit {
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 40px;
-    height: 40px;
+    right: 70px;
+    top: 5px;
     border-radius: 5px;
     border: none;
-    background-color: #7289da;
-    color: white;
     cursor: pointer;
 }
 
 button {
+    color: white;
     border: solid 0.5px rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     background-color: transparent;
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
 }
 
 .nav {
@@ -120,4 +128,8 @@ button {
 
 .history p {
     color: white;
-}
+} 
+
+p {
+    color: white;
+} 

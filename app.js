@@ -1,12 +1,15 @@
-const API_KEY = "";
-const chatSendButton = document.querySelector(".chat-send");
-const chatInput = document.querySelector(".chat-input");
-const chatContainer = document.querySelector(".chat-container");
-const output = document.querySelector(".output");
+const API_KEY = "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"; // Replace with OpenAI API key
+const submitButton = document.querySelector("#submit");
+const output = document.querySelector("#output");
+const chatInput = document.querySelector("input");
+const chatHistory = document.querySelector(".history");
+const buttonElement = document.querySelector('button');
 const BASE_URL = "https://api.openai.com/v1/chat/completions";
 
-async function generateResponse(message) {
-    const response = await fetch(BASE_URL, {
+
+async function getMessage(){
+    console.log('clicked')
+    const options = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -14,28 +17,18 @@ async function generateResponse(message) {
         },
         body: JSON.stringify({
             model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: message }],
+            messages: [{role: "user", content: "hellow"}],
+            max_tokens: 1000,
         }),
-    });
+    };
 
-    if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-    }
-
+try{
+    const response = await fetch(BASE_URL, options);
     const data = await response.json();
-
-    if (!data.choices || data.choices.length === 0) {
-        throw new Error("Error: No response choices found.");
-    }
-
-    return data.choices[0].message.content;
+    console.log(data);
+}catch(error){
+    console.log(error);
 }
 
 
-chatSendButton.addEventListener("click", async () => {
-    const message = chatInput.value;
-    chatInput.value = "";
-    const response = await generateResponse(message);
-    output.innerHTML = response;
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-})
+}
