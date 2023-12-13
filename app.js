@@ -1,4 +1,4 @@
-const API_KEY = "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"; // Dummy OpenAI API key
+const API_KEY = "<YOUR_API_KEY>"; // Dummy OpenAI API key
 const submitButton = document.querySelector("#submit");
 const outPutElement = document.querySelector("#output");
 const inputElement = document.querySelector("input");
@@ -62,7 +62,7 @@ async function getMessage(){
 
 submitButton.addEventListener("click", getMessage);
 
-buttonElement.addEventListener("click", clearAll);
+buttonElement.addEventListener("click", clearAll, saveConversation);
 
 
 inputElement.addEventListener("keypress", (event) => {
@@ -104,5 +104,17 @@ function displayHistory(text) {
     chatHistory.innerHTML = text;
 }
 
+function saveConversation(text) {
+    const conversationElement = document.createElement("p");
+    conversation.textContent = text;
+    historyElement.appendChild(conversationElement);
+    console.log("Conversation saved: ", conversation);
+}
+function loadConversation(text) {
+    const conversationElement = document.createElement("p");
+    conversation.textContent = text;
+    historyElement.appendChild(conversationElement);
+    console.log("Conversation loaded: ", conversation);
+}
 
 console.log("app.js loaded");
