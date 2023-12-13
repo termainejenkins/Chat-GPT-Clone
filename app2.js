@@ -1,4 +1,4 @@
-const API_KEY = "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";
+const API_KEY = "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";
 const chatSendButton = document.querySelector(".chat-send");
 const chatInput = document.querySelector(".chat-input");
 const chatContainer = document.querySelector(".chat-container");
@@ -32,10 +32,12 @@ async function generateResponse(message) {
 }
 
 
-chatSendButton.addEventListener("click", async () => {
+submit.addEventListener("click", async () => {
     const message = chatInput.value;
     chatInput.value = "";
     const response = await generateResponse(message);
     output.innerHTML = response;
     chatContainer.scrollTop = chatContainer.scrollHeight;
 })
+
+console.log("app2.js loaded");
