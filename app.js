@@ -13,6 +13,13 @@ function changeInput(text) {
 
 async function getMessage(){
     console.log('clicked')
+
+    if (!inputElement.value) {
+        alert("Please enter a message");
+        return;
+    }
+ 
+
     const options = {
         method: "POST",
         headers: {
@@ -26,19 +33,37 @@ async function getMessage(){
         }),
     };
 
+    
+    const outPutElement = document.createElement("p");
+    outPutElement.textContent = "YOU:  " + inputElement.value;
+    output.appendChild(outPutElement);
+    console.log("User Message: ", inputElement.value)
+    inputElement.value = "";
+
     const response = await fetch(BASE_URL, options);
     const data = await response.json();
-    console.log("User Message: ", options)
-    console.log("GPT Response: ", data);
+
+    
     if (data.choices[0].message.content){
         const outPutElement = document.createElement("p");
-        outPutElement.textContent = data.choices[0].message.content;
+        outPutElement.textContent = "GPT:  " + data.choices[0].message.content;
         output.appendChild(outPutElement);
+        // historyElement.appendChild(outPutElement)
+        console.log("GPT Response: ", data.choices[0].message.content)
+    } else {
+        const outPutElement = document.createElement("p");
+        outPutElement.textContent = "No response from GPT";
+        output.appendChild(outPutElement);
+        console.log("No response from GPT")        
     }
+
 
 }
 
 submitButton.addEventListener("click", getMessage);
+
+buttonElement.addEventListener("click", clearAll);
+
 
 inputElement.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
@@ -54,11 +79,11 @@ function addMessage(message) {
 }
 
 function clearInput() {
-    chatInput.value = "";
+    outPutElement.value = "";
 }
 
 function clearHistory() {
-    chatHistory.innerHTML = "";
+    historyElement.innerHTML = "";
 }
 
 function clearOutput() {
@@ -75,7 +100,9 @@ function displayOutput(text) {
     output.innerHTML = text;
 }
 
-buttonElement.addEventListener("click", clearAll);
+function displayHistory(text) {
+    chatHistory.innerHTML = text;
+}
 
 
 console.log("app.js loaded");

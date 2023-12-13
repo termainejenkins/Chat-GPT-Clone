@@ -133,3 +133,10 @@ button {
 p {
     color: white;
 } 
+
+p1 {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    text-align: left;
+    font-weight: bolder;
+}
