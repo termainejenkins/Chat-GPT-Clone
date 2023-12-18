@@ -1,15 +1,20 @@
-const API_KEY = "<YOUR_API_KEY>"; // Dummy OpenAI API key
+// app.js
+
+// Retrieve the API key from localStorage or set a default value
+let API_KEY = localStorage.getItem('api_key'); // Taken from the frontend, OpenAI API key
 const submitButton = document.querySelector("#submit");
 const outPutElement = document.querySelector("#output");
-const inputElement = document.querySelector("input");
+const inputElement = document.querySelector("#user-input");
 const historyElement = document.querySelector(".history");
 const buttonElement = document.querySelector('button');
+const apiKeyIndicator = document.getElementById('api-key-indicator');
 const BASE_URL = "https://api.openai.com/v1/chat/completions";
 
 function changeInput(text) {
-    const intputElement = document.querySelector("input");
-    intputElement.value = value;
+    const inputElement = document.querySelector("input");
+    inputElement.value = text;
 }
+
 
 async function getMessage(){
     console.log('clicked')
@@ -60,10 +65,44 @@ async function getMessage(){
 
 }
 
+
+
+// Function to set the API key in localStorage
+function setApiKey(key) {
+    API_KEY = key;
+    localStorage.setItem('api_key', key);
+}
+
 submitButton.addEventListener("click", getMessage);
 
 buttonElement.addEventListener("click", clearAll, saveConversation);
 
+// Event listener for the "Save" button
+const saveApiKeyButton = document.getElementById('save-api-key');
+const apiKeyInput = document.getElementById('api-key');
+
+
+
+// Update the visual indicator based on whether API key is saved
+function updateApiKeyIndicator() {
+    if (API_KEY) {
+        apiKeyIndicator.textContent = 'API Key Saved';
+        apiKeyIndicator.style.color = 'green'; // Change color or use a class for styling
+    } else {
+        apiKeyIndicator.textContent = 'No API Key Saved';
+        apiKeyIndicator.style.color = 'red'; // Change color or use a class for styling
+    }
+}
+
+// Call the function initially to set the indicator based on the existing API key
+updateApiKeyIndicator();
+
+
+saveApiKeyButton.addEventListener('click', () => {
+    setApiKey(apiKeyInput.value);
+    updateApiKeyIndicator(); // Update the indicator after saving
+    alert('API Key saved!');
+});
 
 inputElement.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
